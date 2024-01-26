@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.web.general.account.mapper.AccountMapper">
+
+	<insert id="insertUser" parameterType="CreateAccountVo">
+		INSERT INTO
+			USER_TBL
+		(
+			USER_ID
+			, PASSWORD
+			, USER_NAME
+			, BIRTH_YEAR
+			, BIRTH_MONTH
+			, BIRTH_DAY
+			, PHONE_NUM_FIRST
+			, PHONE_NUM_MIDDLE
+			, PHONE_NUM_LAST
+			, EMAIL_ID
+			, EMAIL_DOMAIN
+			, POST_CODE
+			, ADRESS
+			, ADRESS_DETAIL
+		)
+		VALUES
+		(
+			#{userId}
+			, F_ENCRYPT(#{password})
+			, F_ENCRYPT(#{userName})
+			, F_ENCRYPT(#{birthYear})
+			, F_ENCRYPT(#{birthMonth})
+			, F_ENCRYPT(#{birthDay})
+			, F_ENCRYPT(#{phoneNumFirst})
+			, F_ENCRYPT(#{phoneNumMiddle})
+			, F_ENCRYPT(#{phoneNumLast})
+			, F_ENCRYPT(#{emailId})
+			, F_ENCRYPT(#{emailDomain})
+			, F_ENCRYPT(#{postCode})
+			, F_ENCRYPT(#{adress})
+			, F_ENCRYPT(#{adressDetail})
+		)
+	</insert>
+
+	<select id="isExistsUserId" parameterType="String" resultType="boolean">
+		SELECT EXISTS 
+			(SELECT 1 FROM USER_TBL WHERE USER_ID = BINARY #{userId})
+	</select>
+
+</mapper>

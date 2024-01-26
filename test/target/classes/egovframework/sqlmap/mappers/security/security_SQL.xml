@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.config.security.mapper.SecurityMapper">
+
+	<select id="getUserByIdForLogin" resultType="UserVo">
+		SELECT 
+			USER_ID AS userId
+			,  F_DECRYPT(PASSWORD) AS password
+			, AUTHORITY_ID AS authorityId
+			, IS_ACCOUNT_NON_EXPIRED AS isAccountNonExpired
+			, IS_ACCOUNT_NON_LOCKED AS isAccountNonLocked
+			, IS_CREDENTIALS_NON_EXPIRED AS isCredentialsNonExpired
+			, IS_ENABLED AS isEnabled
+		FROM 
+			USER_TBL
+		WHERE 
+			USER_ID = BINARY #{userId} 
+	</select>
+	
+	<select id="getUserDetailById" parameterType="String" resultType="UserDetailVo">
+		SELECT 
+			F_DECRYPT(USER_NAME) AS userName
+			, F_DECRYPT(BIRTH_YEAR) AS birthYear
+			, F_DECRYPT(BIRTH_MONTH) AS birthMonth
+			, F_DECRYPT(BIRTH_DAY) AS birthDay
+			, F_DECRYPT(PHONE_NUM_FIRST) AS phoneNumFirst
+			, F_DECRYPT(PHONE_NUM_MIDDLE) AS phoneNumMiddle
+			, F_DECRYPT(PHONE_NUM_LAST) AS phoneNumLast
+			, F_DECRYPT(EMAIL_ID) AS emailId
+			, F_DECRYPT(EMAIL_DOMAIN) AS emailDomain
+			, F_DECRYPT(POST_CODE) AS postCode
+			, F_DECRYPT(ADRESS) AS adress
+			, F_DECRYPT(ADRESS_DETAIL) AS adressDetail
+		FROM
+			USER_TBL 
+		WHERE 
+			USER_ID = BINARY #{userId} 
+	</select>
+
+</mapper>

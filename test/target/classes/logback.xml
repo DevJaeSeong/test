@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+    <!-- Appenders -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+	
+				<Pattern>%d{HH:mm:ss} %-5p [%-4L] %-37c{0} - %-32M : %m%n</Pattern>
+				<!--  
+				<Pattern>%d{HH:mm:ss} %-5p [%-4L] %-80c - %-32M : %m%n</Pattern>
+				-->
+				
+			</layout>
+		</encoder>
+    </appender>
+    
+    <logger name="org.springframework.web" level="info" />
+    <logger name="org.springframework.security" level="info" />
+    <logger name="org.springframework.context" level="info" />
+    <logger name="org.springframework.beans" level="info" />
+    <logger name="org.springframework.jdbc" level="info" />
+    <logger name="org.apache.ibatis" level="info" />
+    <logger name="org.mybatis" level="info" />
+    <logger name="org.egovframe.rte" level="info" />
+    <logger name="java.sql" level="info" />
+    <logger name="org.mariadb.jdbc" level="info" />
+    
+    <root level="debug">
+		<appender-ref ref="STDOUT"/>
+	</root>
+    
+</Configuration>

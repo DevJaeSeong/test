@@ -1,0 +1,596 @@
+@charset "utf-8";
+/************************************************************************
+ * 프로젝트   : 이스타항공 AUTH시스템
+ * 파일명      : component.css
+ * 설명         : 기본_공통
+ * 작성일      : 2018.02 
+************************************************************************/
+
+
+/*txt_view*/
+.txt_view{ padding:10px 20px; 
+	line-height:23px;
+	color:#444; }
+.qcomment_box { overflow:hidden;}
+.qcomment_box textarea { border: 1px solid #abb1b5; 
+	padding: 7px 7px; 
+	width:100%; }
+
+
+
+/*check_tit*/
+.check_tit{float:left;
+	font-size:12px;
+	padding-left:15px;
+	font-weight:bold;}
+
+
+
+/*btn*/
+.btnType01_5 { display: inline-block; 
+	overflow: visible; 
+	height: 28px; 
+	padding: 0 20px; 
+	color: #fff; 
+	font-size: 12px; 
+	font-weight:700; 
+	text-align: center; 
+	line-height: 28px; 
+	background-color: #b0282a; 
+	cursor: pointer; 
+	vertical-align: middle; 
+	border:1px solid #b0282a; }
+.btnType01_6 { display: inline-block; 
+	overflow: visible; 
+	height: 32px; 
+	padding: 0 15px; 
+	color: #fff; 
+	font-size: 14px; 
+	font-weight:700; 
+	text-align: center; 
+	line-height: 28px; 
+	background-color: #909090; 
+	cursor: pointer; 
+	vertical-align: middle; 
+	margin-left: 4px; 
+	border:1px solid #909090; }
+
+.piece{overflow:hidden;}
+.piece_tb{width:346px;
+	/*border-left:1px solid #dedede;*/
+	float:left;}
+
+.tbBtn{position:absolute;
+	top:30px;
+	right:0;}
+.tdBtn{margin:0 !important;}
+
+
+
+
+
+/*공통*/
+.pr_0 {padding-right:0 !important;}
+.pr_5 {padding-right:5px !important;}
+.pr_7 {padding-right:7px !important;}
+.pr_10 {padding-right:10px !important;}
+.pr_20 {padding-right:20px !important;}
+
+.pt_5{padding-top:5px !important;}
+.pt_10{padding-top:10px !important;}
+
+.relative{position:relative;}
+
+.f_right{float:right !important;}
+.f_left{float:left !important;}
+
+.textLeft{text-align:left !important;}
+.textCenter{text-align:center !important;}
+.textRight{text-align:right !important;}
+
+.txt_view{min-height:300px !important;}
+
+
+
+/*loading_bar*/
+.loading{display:block;/*
+	background:rgba(0, 0, 0, .6);*/
+	background:rgba(255, 255, 255, .6);
+	width:100%;
+	position:fixed;
+	top:0;
+	bottom:0;
+	left:0;
+	cursor:pointer;
+	z-index:1000;
+	overflow:hidden;
+	overflow-y:auto;
+	}
+.loading .load_wrap{display:inline-block;
+	width:210px;
+	height:210px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	z-index:9999;
+	margin-left:-105px;
+	margin-top:-105px;
+	text-align:center;}
+.loading .load_wrap .load{float:left;
+	width:100%;
+	position:relative;}
+.loading .load_wrap .load img{width:300px;
+	height:100px;}
+
+
+
+
+/*tab*/
+.boxTab_LN05 { position:relative; 
+	display:block; 
+	overflow:hidden; 
+	clear:both; }
+.boxTab_LN05 li { float:left; 
+	width:20%; 
+	margin:0 -1px 0 0; 
+	box-sizing:border-box; }
+.boxTab_LN05 li a.tab_Btn { display:block;
+	line-height:35px; 
+	text-align:center; 
+	font-size:13px; }
+.boxTab_LN05 li a.tab_Btn { width: 100%; 
+	float: left; 
+	text-align: center; 
+	color: #b0282a; 
+	background: #fff; 
+	border: 1px solid #ddd;  }
+.boxTab_LN05 li a:hover, .boxTab_LN05 li a:focus, .boxTab_LN05 li a:active, .boxTab_LN05 li a.on { color: #fff; 
+	border: 1px solid #b0282a;  
+	font-weight:700; 
+	background-color:#b0282a; }
+
+
+
+
+
+
+/*popup*/
+#popupLayer{border:2px solid #455;}
+.popup_m_tit{color:#fff;
+	font-weight:bold;
+	margin-left:-5px;
+	font-size:15px;}
+.popup_m_tit2{color:#fff;
+	font-size:12px;}
+
+.layerWrap{border:2.5px solid #b0282a;}
+
+.dim{width:100%;
+	height:100%;
+	position:fixed;
+	top:0;
+	left:0;
+	opacity:0.5;
+	background:#000;
+	z-index:100;}
+
+.layer_tit .tit_txt{padding:10px 80px 12px 20px;
+	color:#fff;
+	font-size:22px;
+	background-color:#a91e3e;}
+
+
+
+/*check_box*/
+.mini_check {position:relative; 
+	text-align:left; 
+	cursor:pointer; 
+	overflow:hidden;}
+.mini_ck_table {position:relative; 
+	text-align:left; 
+	cursor:pointer; 
+	overflow:hidden; 
+	top:4px; 
+	display:inline-block;}
+.mini_check input.form-inputPop, .mini_ck_table input.form-inputPop {position:absolute; 
+	top:5px; 
+	left:0; 
+	opacity:0; 
+	cursor:pointer; 
+	z-index:5; 
+	width:16px; 
+	height:16px;}
+.mini_check i, .mini_ck_table i {float:left; 
+	display:block; 
+	width:16px; 
+	height:16px; 
+	background: url(../../images/agent/check_all.png) no-repeat left top; 
+	background-size:16px;
+	margin-top:3px;
+	z-index:3;}
+.mini_check label, .mini_ck_table label  {float:left; 
+	margin-left:4px; 
+	cursor:pointer; 
+	font-size:14px; 
+	color:#434a5d;}
+.mini_check input.form-inputPop:checked+i, .mini_ck_table input.form-inputPop:checked+i {background-position:left bottom;}
+.mini_check input.form-inputPop:checked+i+label, .mini_ck_table input.form-inputPop:checked+i+label {color:#434a5d;}
+
+.mini_radio {position:relative; 
+	text-align:left; 
+	cursor:pointer; 
+	overflow:hidden;}
+.mini_r_table {position:relative; 
+	text-align:left; 
+	cursor:pointer; 
+	overflow:hidden; 
+	top:4px; 
+	display:inline-block  ;}
+.mini_radio input.form-inputPop1, .mini_r_table input.form-inputPop1 {position:absolute; 
+	top:5px; 
+	left:0; 
+	opacity:0; 
+	cursor:pointer; 
+	z-index:5; 
+	width:16px; 
+	height:16px;}
+.mini_radio i, .mini_r_table i {float:left; 
+	display:block; 
+	width:16px; 
+	height:16px; 
+	background-size:16px !important;
+	margin-top:4px;
+	background: url(../../images/agent/radio_all.png) no-repeat left top; 
+	z-index:3;}
+.mini_radio label, .mini_r_table label  {float:left; 
+	margin-left:4px; 
+	cursor:pointer; 
+	font-size:15px; 
+	color:#434a5d;}
+.mini_radio input.form-inputPop1:checked+i, .mini_r_table input.form-inputPop1:checked+i {background-position:left bottom;}
+.mini_radio input.form-inputPop1:checked+i+label, .mini_r_table input.form-inputPop1:checked+i+label {color:#434a5d;}
+
+.day_check div{float:left;
+	margin-right:26px;}
+.day_check div:last-child{margin-right:0;}
+
+
+
+
+/*error_page*/
+.error_container{width:100% !important;
+	}
+.error_container .content{margin:100px auto;
+	float:none;
+	width:905px;}
+.error_container .error_wrap{width:100% !important;}
+.error_wrap .cont_box{border:none !important;}
+.error_container .error_wrap span, .error_container .error_wrap p{font-family:'Noto Sans','Noto Sans CJK KR','Noto Sans KR Regular' ,sans-serif !important; }
+
+.error{text-align:center;
+	overflow:hidden;
+	margin-bottom:80px;}
+.error .warning{font-size:19px;
+	font-weight:bold;
+	color:#B0282A;
+	display:inline-block;
+	margin-bottom:30px;
+	margin-top:45px;}
+.error p{font-size:15px;
+	margin-bottom:10px;
+	line-height:20px;}
+.error_wrap .error_btn{text-align:center;}
+
+
+
+
+/*NEW, NOTICE class*/
+table td .new_box { background-color:#D17D50 !important; 
+	color:#FFF !important; 
+	font-size:10px !important; 
+	line-height:15px !important; 
+	width:15px !important;
+	height:15px !important;
+	display:inline-block !important;
+	border-radius:0 !important;
+	font-weight:normal !important;}
+
+table td .answer { background-color:#b0282a !important; 
+	color:#FFF !important; 
+	font-weight:bold !important; 
+	padding:5px 8px !important; 
+	font-size:13px !important; 
+	line-height:18px !important; 
+	border-radius:0px !important;}
+
+
+
+
+/*scheduleForm*/
+.mask{position:fixed;
+	top:0;
+	bottom:0;
+	left:0;
+	background:rgba(0, 0, 0, .4);
+	width:100%;
+	display:none;
+	cursor:pointer;
+	z-index:1000;
+	overflow:hidden;
+	overflow-y:auto;}
+.scheduleForm{position:absolute;
+	top:350px;
+	left:500px;/*
+	margin-left:-230px;*/
+	border:2px solid #b0282a;
+	z-index:999;
+	background-color:#fff;
+	padding:20px;
+	width:900px;
+	overflow:hidden;
+	display:none;
+	text-align:center;/*
+	transform:translateX(-50%) translateY(-50%);*/}
+.scheduleForm .input_tb{float:left;
+	width:150px;}
+.scheduleForm .input_tb td{text-align:left !important;
+	font-size:16px;
+	font-weight:normal;
+	margin-left:}
+
+.scheduleForm .btn{float:right;}
+.scheduleForm button{}
+.scheduleForm table td input{height:32px;
+	padding-left:10px;}
+.scheduleForm table td .mini_r_table{top:0 !important;}
+select.select_style2 { height: 32px; 
+	padding:3px 5px 3px 10px;  
+	border-width: 1px; 
+	border-style: solid;	
+	border-color: rgb(137, 143, 148) rgb(179, 187, 193) rgb(179, 187, 193) rgb(137, 143, 148); 
+	color: #666; 
+	font-size: 13px; 
+	line-height: 28px; 
+	vertical-align: top  ; }
+
+
+
+
+/*예매 조회정보 입력*/
+.cross{text-align:left !important;}
+.chBox{}
+.ckBox{}
+.chBox .check_table2{float:left;}
+
+.ckml_3{margin-left:2px;
+	-webkit-margin-start:5px;}
+
+.mini_check {position:relative; 
+	text-align:left; 
+	cursor:pointer; 
+	overflow:hidden;}
+.mini_ck_table {position:relative; 
+	text-align:left; 
+	cursor:pointer; 
+	overflow:hidden; 
+	top:4px; 
+	display:inline-block;}
+.mini_check input.form-inputPop, .mini_ck_table input.form-inputPop {position:absolute; 
+	top:5px; 
+	left:0; 
+	opacity:0; 
+	cursor:pointer; 
+	z-index:5; 
+	width:16px; 
+	height:16px;}
+.mini_check i, .mini_ck_table i {float:left; 
+	display:block; 
+	width:16px; 
+	height:16px; 
+	background: url(../../images/agent/check_all.png) no-repeat left top; 
+	background-size:16px;
+	margin-top:3px;
+	z-index:3;}
+.mini_check label, .mini_ck_table label  {float:left; 
+	margin-left:4px; 
+	cursor:pointer; 
+	font-size:14px; 
+	color:#434a5d;}
+.mini_check input.form-inputPop:checked+i, .mini_ck_table input.form-inputPop:checked+i {background-position:left bottom;}
+.mini_check input.form-inputPop:checked+i+label, .mini_ck_table input.form-inputPop:checked+i+label {color:#434a5d;}
+
+
+
+.mini_radio {position:relative; 
+	text-align:left; 
+	cursor:pointer; 
+	overflow:hidden;}
+.mini_r_table {position:relative; 
+	text-align:left; 
+	cursor:pointer; 
+	overflow:hidden; 
+	top:4px; 
+	display:inline-block  ;}
+.mini_radio input.form-inputPop1, .mini_r_table input.form-inputPop1 {position:absolute; 
+	top:5px; 
+	left:0; 
+	opacity:0; 
+	cursor:pointer; 
+	z-index:5; 
+	width:16px; 
+	height:16px;}
+.mini_radio i, .mini_r_table i {float:left; 
+	display:block; 
+	width:16px; 
+	height:16px; 
+	background-size:16px !important;
+	margin-top:4px;
+	background: url(../../images/agent/radio_all.png) no-repeat left top; 
+	z-index:3;}
+.mini_radio label, .mini_r_table label  {float:left; 
+	margin-left:4px; 
+	cursor:pointer; 
+	font-size:15px; 
+	color:#434a5d;}
+.mini_radio input.form-inputPop1:checked+i, .mini_r_table input.form-inputPop1:checked+i {background-position:left bottom;}
+.mini_radio input.form-inputPop1:checked+i+label, .mini_r_table input.form-inputPop1:checked+i+label {color:#434a5d;}
+
+
+
+
+/*agreement,invoice publ*/
+.publ_wrap{}
+.publ_part{border:1px solid #d4d4d4;
+	padding:20px 40px;}
+.publ_part .top{
+	border-bottom:1px solid #333;
+	position:relative;
+	padding:20px 0;}
+.publ_part .top span{position:absolute;
+	top:15px;
+	left:30px;}
+.publ_part .top h3{text-align:center;
+	font-size:18px;
+	font-weight:900;}
+.publ_part .intro{margin-top:20px;}
+.publ_part .intro p{font-size:14px;
+	margin-bottom:10px;}
+.publ_part .intro h4{font-size:16px;
+	margin-bottom:10px;}
+.publ_part .rule_list{}
+.publ_part .rule_list li{font-size:14px;
+	padding:7px 10px;}
+.publ_part .rule_list .no_pb{padding-bottom:10px !important;}
+.publ_part .rule_list .no_pt{padding-top:0 !important;}
+.publ_part .rule_list li:last-child{font-weight:bold;}
+.publ_part .rule_list li .sub_list{}
+.publ_part .rule_list li .sub_list li{font-size:14px;
+	padding:3px 10px;}
+.publ_part .rule_list li .sub_list li:first-child{padding-top:0 !important;}
+.publ_part .rule_list li .sub_list li:last-child{font-weight:normal;}
+.publ_part .rule_list li .sub_list .refund{margin-left:15px;}
+.publ_part .days{text-align:center;
+	font-weight:bold;
+	font-size:16px;
+	display:block;
+	margin:30px 0;}
+.publ_part .btm{font-size:18px;
+	overflow:hidden;}
+.publ_part .btm span{float:left;
+	display:block;
+	text-align:center;
+	width:468px;
+	padding:10px 0;
+	font-weight:bold;}
+
+.publ_part table th{height:26px !important;}
+.publ_part table td{height:26px !important;}
+
+.note_box p{display:block;
+	font-size:13.5px;
+	letter-spacing:2px;
+	line-height:15px;}
+.note_box .note{padding:20px 0 0 0;
+	margin-bottom:-15px;
+	color:#b0282a;}
+.note_box .note2{padding:10px 0 0 0;}
+.note_logo{font-size:18px;
+	letter-spacing:5px;
+	font-weight:900;
+	text-align:center;
+	display:block;
+	padding:10px 0;}
+
+.pdf_line{border-top:1px solid #cecece;
+	display:inline-block;
+	width:100%;}
+
+.publ_part .date_info{font-size:15px;
+	margin-top:20px;}
+.publ_part .date_info li{margin:10px 0 10px 0;}
+.publ_part .date_info li dl{overflow:hidden;}
+.publ_part .date_info li dl dt{margin-right:10px;
+	font-weight:700;
+	float:left;}
+.publ_part .date_info li dl dd{float:left;}
+.publ_part .date_info .issue_date{float:right;}
+.publ_part .date_info .receive{}
+.publ_part .date_info .dispatch{}
+
+
+
+
+/*fileAdd*/
+.fileAdd{padding:15px 20px 16px;}
+.fileAdd .txt{font-weight:bold;
+	color:#767676;
+	font-size:13px;}
+.fileAdd .file, .fileAdd .link{background:url(../images/icon_bar1x12.gif) no-repeat left 4px;
+	padding-left:11px;
+	margin-left:6px;}
+.box_Txt{display:inline-block;
+	overflow:hidden;
+	position:relative;
+	max-width:250px;
+	height:20px;
+	padding:5px 25px 3px 6px;
+	color:#0294e8;
+	border:1px solid #abb1b5;
+	vertical-align:middle;
+	background-color:#f7f7f7;
+	margin:2px 0;}
+.box_Txt .txt_b_area{display:block;
+	overflow:hidden;
+	font-size:12px;
+	line-height:18px;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	color:#646262;}
+.box_Txt .btn_dow{position:absolute;
+	top:5px;
+	right:5px;
+	width:18px;
+	height:18px;
+	margin-left:1px;
+	background:url(../images/btn_down.png)no-repeat;}
+	
+	
+
+	
+/*check_terms*/
+.check_terms table span{line-height:27px;}
+.check_terms table th:first-child{}
+.check_terms table th:last-child{}
+.check_terms table td:first-child{}
+.check_terms table td:last-child{}
+
+
+
+
+
+/*total*/
+.total{float:none;
+	display:inline-block;
+	padding:0 0 0 25px !important;
+	background-position:5px 0 !important;
+	margin-top:2px;}
+
+
+
+
+
+/*모객관리*/
+.bd_n_tb{border-top:none !important;
+	border-right:none !important;
+	border-left:none !important;}
+.h_28{height:28px !important;}
+.divi_line{border-top:1px solid #cecece;
+	display:inline-block;
+	width:100%;
+	margin-top:20px;}
+.pt_label{font-weight:bold;
+	line-height:30px;
+	color:#fff;
+	padding:3px;
+	background:#b0282a;
+	font-size:13px;}
