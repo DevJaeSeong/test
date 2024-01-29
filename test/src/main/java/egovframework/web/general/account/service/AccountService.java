@@ -20,10 +20,9 @@ public class AccountService {
 		
 		try {
 			
-			String hashedPassword = passwordEncoder.encode(createAccountVo.getPassword());
-			createAccountVo.setPassword(hashedPassword);
-			int result = accountMapper.insertUser(createAccountVo);
-			return result  > 0 ? true : false;
+			createAccountVo.setPassword(passwordEncoder.encode(createAccountVo.getPassword()));
+			
+			return accountMapper.insertUser(createAccountVo) > 0;
 			
 		} catch (Exception e) {
 			

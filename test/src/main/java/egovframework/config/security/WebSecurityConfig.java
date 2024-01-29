@@ -87,6 +87,7 @@ public class WebSecurityConfig {
 				try {
 					
 					UserDetailVo userDetailVo = securityMapper.getUserDetailById(authentication.getName());
+					
 					UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
 					token.setDetails(userDetailVo);
 					
@@ -96,7 +97,19 @@ public class WebSecurityConfig {
 					e.printStackTrace();
 				}
 				
-				response.sendRedirect("/general/main");
+				String redirectPath = "/general/main";
+				List<? extends GrantedAuthority> grantedAuthorities = (List<? extends GrantedAuthority>) authentication.getAuthorities();
+				
+				for (GrantedAuthority grantedAuthority : grantedAuthorities) {
+					
+					if ("ROLE_ADMIN".equals(grantedAuthority.getAuthority())) { 
+						
+						redirectPath = "/admin/main"; 
+						break; 
+					}
+				}
+				
+				response.sendRedirect(redirectPath);
 			})
 			.failureHandler((request, response, authentication) -> {
 				
@@ -108,10 +121,9 @@ public class WebSecurityConfig {
 		);
 		
 		http.logout((logout) -> logout
-				
+			
 			.logoutUrl("/logoutConfirm")
 			.permitAll()
-			.invalidateHttpSession(true)
 			.logoutSuccessHandler((request, response, authentication) -> {
 				
 				response.sendRedirect("/general/main");
