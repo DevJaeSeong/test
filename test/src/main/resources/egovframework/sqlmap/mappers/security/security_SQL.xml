@@ -7,10 +7,10 @@
 			USER_ID AS userId
 			,  F_DECRYPT(PASSWORD) AS password
 			, AUTHORITY_ID AS authorityId
-			, IS_ACCOUNT_NON_EXPIRED AS isAccountNonExpired
-			, IS_ACCOUNT_NON_LOCKED AS isAccountNonLocked
-			, IS_CREDENTIALS_NON_EXPIRED AS isCredentialsNonExpired
-			, IS_ENABLED AS isEnabled
+			, ACCOUNT_EXPIRED AS accountExpired
+			, ACCOUNT_LOCKED AS accountLocked
+			, CREDENTIALS_EXPIRED AS credentialsExpired
+			, DISABLED AS disabled
 		FROM 
 			USER_TBL
 		WHERE 

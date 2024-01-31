@@ -1,6 +1,7 @@
 package egovframework.config.filter;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.ContentCachingResponseWrapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,13 +36,16 @@ public class RequestPrintFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
         
-		request = new CustomHttpServletRequestWrapper(request, executor);
+		CustomHttpServletRequestWrapper requestWrapper = new CustomHttpServletRequestWrapper(request, executor);
+		ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response);
 		
-		printRequest((CustomHttpServletRequestWrapper) request);
+		printRequest(requestWrapper);
 		
-		filterChain.doFilter(request, response);
+		filterChain.doFilter(requestWrapper, responseWrapper);
+		
+		printResponse(responseWrapper);
 	}
-	
+
 	/**
 	 * 서버에 접근하는 사용자의 정보를 콘솔에 출력.
 	 */
@@ -50,21 +55,47 @@ public class RequestPrintFilter extends OncePerRequestFilter {
 		String remoteAddr = request.getRemoteAddr();
 		String sessionId = request.getRequestedSessionId();
 		String method = request.getMethod();
+		//String requestHeader = getRequestHeader(request);
 		String requestBody = readRequest(request);
 		String principal = "";
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		if (authentication instanceof UsernamePasswordAuthenticationToken) {
+		if (authentication instanceof UsernamePasswordAuthenticationToken) 
+			{ principal = ((User) authentication.getPrincipal()).toString(); } 
+		
+		else if (authentication instanceof AnonymousAuthenticationToken) 
+			{ principal = (String) authentication.getPrincipal(); }
+		
+		log.debug("<= [\"{}\", \"{}\", \"{}\"], [({}) \"{}\", body: {}]", remoteAddr, sessionId, principal, method, requestURI, requestBody);
+	}
+	
+	private void printResponse(ContentCachingResponseWrapper responseWrapper) throws IOException {
+		
+		//String header = getResponseHeader(responseWrapper);
+		String contentType = responseWrapper.getContentType();
+		String content = "<생략>";
+		
+		if (contentType != null) {
 			
-			principal = ((User) authentication.getPrincipal()).toString();
+			switch (contentType) {
 			
-		} else if (authentication instanceof AnonymousAuthenticationToken) {
-			
-			principal = (String) authentication.getPrincipal();
+				case "text/html":
+					break;
+					
+				case "application/json":
+					content = new String(responseWrapper.getContentAsByteArray(), "UTF-8");
+					break;
+	
+				default:
+					break;
+			}
 		}
 		
-		log.debug("사용자: [\"{}\", \"{}\", \"{}\"], 요청내용: [({}) \"{}\", \"{}\"]", remoteAddr, sessionId, principal, method, requestURI, requestBody);
+		//log.debug("=> header: [{}], contentType: {}, content: [{}]", header, contentType, content);
+		log.debug("=> contentType: {}, content: [{}]", contentType, content);
+		
+		responseWrapper.copyBodyToResponse();
 	}
 
 	private String readRequest(CustomHttpServletRequestWrapper request) {
@@ -97,5 +128,50 @@ public class RequestPrintFilter extends OncePerRequestFilter {
         }
 		
     	return parameterMap.toString();
+    }
+    
+    private String getRequestHeader(HttpServletRequest request) {
+    	
+    	Enumeration<String> headerNames = request.getHeaderNames();
+		
+		StringBuilder headerStringBuilder = new StringBuilder();
+		
+		while (headerNames.hasMoreElements()) {
+			
+			String headerName = headerNames.nextElement();
+			String header = request.getHeader(headerName);
+			
+			headerStringBuilder.append(headerName);
+			headerStringBuilder.append(": ");
+			headerStringBuilder.append(header);
+			headerStringBuilder.append(", ");
+		}
+		
+		if (headerStringBuilder.length() >= 2)
+			headerStringBuilder.setLength(headerStringBuilder.length() - 2);
+		
+		return headerStringBuilder.toString();
+    }
+    
+    private String getResponseHeader(ContentCachingResponseWrapper response) {
+    	
+    	Collection<String> headerNames = response.getHeaderNames();
+    	
+    	StringBuilder headerStringBuilder = new StringBuilder();
+    	
+    	for (String headerName : headerNames) {
+    		
+    		String header = response.getHeader(headerName);
+    		
+    		headerStringBuilder.append(headerName);
+    		headerStringBuilder.append(": ");
+    		headerStringBuilder.append(header);
+    		headerStringBuilder.append(", ");
+    	}
+    	
+    	if (headerStringBuilder.length() >= 2)
+    		headerStringBuilder.setLength(headerStringBuilder.length() - 2);
+    	
+    	return headerStringBuilder.toString();
     }
 }

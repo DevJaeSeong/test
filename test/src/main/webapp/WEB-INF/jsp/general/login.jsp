@@ -69,7 +69,7 @@
                     <!-- input_form -->
                     <div class="input_form">
                         <!-- input_box -->
-                        <form id="loginForm" method="post" action="/loginConfirm">
+                        <form id="loginForm" method="post" action="/loginConfirm" accept-charset="UTF-8">
 	                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	                        <div class="input_box mb_10">
 	                            <input name="userId" title="아이디" class="input_log" type="text" placeholder="아이디">

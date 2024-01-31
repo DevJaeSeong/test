@@ -8,7 +8,10 @@ import java.util.concurrent.Executor;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -111,10 +114,24 @@ public class WebSecurityConfig {
 				
 				response.sendRedirect(redirectPath);
 			})
-			.failureHandler((request, response, authentication) -> {
+			.failureHandler((request, response, exception) -> {
+				
+				log.debug("로그인 실패: [{}] {}",exception.getStackTrace()[0] ,exception.getMessage());
+				
+				String errorMsg;
+				
+				if (exception instanceof UsernameNotFoundException) 
+					{ errorMsg = "아이디 또는 비밀번호가 잘못되었습니다."; } 
+				
+				else if (exception instanceof BadCredentialsException) 
+					{ errorMsg = "아이디 또는 비밀번호가 잘못되었습니다."; } 
+				
+				else 
+					{ errorMsg = "로그인에 실패하였습니다.."; }
+				
 				
 				HttpSession session = request.getSession();
-				session.setAttribute("errorMsg", "로그인에 실패하였습니다.");
+				session.setAttribute("errorMsg", errorMsg);
 				
 				response.sendRedirect("/general/login");
 			})
@@ -166,18 +183,21 @@ public class WebSecurityConfig {
 					e.printStackTrace();
 				}
 				
-				if (userVo == null)
-					throw new UsernameNotFoundException("\"" + username + "\" 를 DB에서 조회하지 못함");
+				if (userVo == null) { 
+					
+					throw new UsernameNotFoundException("DB에서 해당 아이디를 조회하지 못함."); 
+				}
 				
-				return new User(
-								 userVo.getUserId(), 
-							     userVo.getPassword(), 
-							     userVo.isEnabled(), 
-							     userVo.isAccountNonExpired(), 
-							     userVo.isCredentialsNonExpired(), 
-							     userVo.isAccountNonLocked(), 
-							     getAuthorities(userVo.getAuthorityId())
-							   );
+				
+				return User.builder()
+							   .username(userVo.getUserId())
+							   .password(userVo.getPassword())
+							   .disabled(userVo.isDisabled())
+							   .accountExpired(userVo.isAccountExpired())
+							   .credentialsExpired(userVo.isCredentialsExpired())
+							   .accountLocked(userVo.isAccountLocked())
+							   .authorities(getAuthorities(userVo.getAuthorityId()))
+						   .build();
 			}
 			
 			private Collection<? extends GrantedAuthority> getAuthorities(String AuthorityId) {
@@ -200,5 +220,17 @@ public class WebSecurityConfig {
 				return authorities;
 			}
 		};
+	}
+	
+	@Bean
+	AuthenticationProvider authenticationProvider() {
+		
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService());
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setHideUserNotFoundExceptions(false);
+        
+        return daoAuthenticationProvider;		
 	}
 }

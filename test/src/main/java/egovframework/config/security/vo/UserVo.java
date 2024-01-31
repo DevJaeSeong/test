@@ -8,8 +8,8 @@ public class UserVo {
 	private String userId;
 	private String password;
 	private String authorityId;
-	private boolean isAccountNonExpired;
-	private boolean isAccountNonLocked;
-	private boolean isCredentialsNonExpired;
-	private boolean isEnabled;
+	private boolean accountExpired;
+	private boolean accountLocked;
+	private boolean credentialsExpired;
+	private boolean disabled;
 }
